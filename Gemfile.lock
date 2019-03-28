@@ -45,8 +45,15 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (9.4.6)
       execjs
+    awesome_print (1.8.0)
+    awesome_rails_console (0.4.3)
+      awesome_print
+      pry-rails
+      railties
     bcrypt (3.1.12)
     bindex (0.5.0)
+    binding_of_caller (0.8.0)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -56,6 +63,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -65,6 +73,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    debug_inspector (0.0.3)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -78,6 +87,10 @@ GEM
       railties (>= 3.2, < 6.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hirb (0.7.3)
+    hirb-unicode-steakknife (0.0.8)
+      hirb (~> 0.5)
+      unicode-display_width (~> 1.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.8.0)
@@ -112,6 +125,17 @@ GEM
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.7.0)
+      byebug (~> 11.0)
+      pry (~> 0.10)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
+    pry-stack_explorer (0.4.9.3)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     public_suffix (3.0.3)
     puma (3.12.1)
     rack (2.0.6)
@@ -184,6 +208,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (1.5.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -200,17 +225,23 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  awesome_rails_console
   bootstrap-sass
   byebug
   carrierwave
   coffee-rails (~> 4.2)
   devise
   font-awesome-rails
+  hirb
+  hirb-unicode-steakknife
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
   listen (~> 3.0.5)
   mini_magick
+  pry
+  pry-byebug
+  pry-stack_explorer
   puma (~> 3.0)
   rails (~> 5.0.7, >= 5.0.7.2)
   sass-rails (~> 5.0)
