@@ -10,7 +10,7 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @product_lists = Order.product_lists
+    @product_lists = @order.product_lists
   end
 
   def ship
@@ -35,5 +35,5 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.return_good!
     redirect_to :back
-  end 
+  end
 end
