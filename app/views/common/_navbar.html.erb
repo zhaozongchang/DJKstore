@@ -20,7 +20,7 @@
               </li>
                 <% if !current_user %>
                 <li><%= link_to("注册", new_user_registration_path) %></li>
-                <li><%= link_to(content_tag(:i, '登入', class: 'fa fa-sign-in'), new_user_session_path) %></li>
+                <li><a href="#" data-toggle="modal" data-target="#login-modal">登入</a></li>
                 <% else %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -46,3 +46,42 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-lavelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="loginmodal-container">
+      <h2 style="text-align:center;">欢迎登录•DJK</h2>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email, label: '邮箱', require: false, autofocus: true %>
+        <%= f.input :password, label: '密码', required: false %>
+        <%= f.input :remember_me, label: '记住密码', as: :boolean if devise_mapping.rememberable? %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "登录" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h2 style="text-align:center;">王洋欢迎你</h2>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.input :email, label: '邮箱', required: true, autofocus: true %>
+        <%= f.input :password, label: '密码', required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimun_password_length) %>
+        <%= f.input :password_confimation, label: '确认密码', required: true %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "注册" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
