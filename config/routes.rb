@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       post :add_to_cart
       put "like", to: "products#upvote"
     end
+    resources :reviews 
   end
 
   resources :carts do

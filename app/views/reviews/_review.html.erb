@@ -1,0 +1,31 @@
+<div class="pull-left">
+    <p ><%= review.body %></p>
+</div>
+<br>
+<div class="pull-right">
+    <p>
+      <small>评论于
+       <strong><%= time_ago_in_words(review.created_at) %>前</strong>
+      </small>
+    </p>
+    <p>
+      <small>评论者
+      <%= review.user.email %>
+      </small>
+    </p>
+
+
+
+</div>
+<br>
+<br>
+<br>
+
+<div class="review-delete">
+    <% if review.user == current_user %>
+      <%= link_to("删除评论", product_review_path(@product, review), method: :delete, data: {
+        confirm: "Are you sure?"},class: "btn btn-sm pull-right") %>
+    <% end %>
+    <br>
+    <hr>
+</div>
