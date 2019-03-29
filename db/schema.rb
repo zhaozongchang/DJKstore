@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190328065743) do
+ActiveRecord::Schema.define(version: 20190328094711) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "cart_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20190328065743) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "weight",           default: 0
+    t.integer  "products_counter", default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+    t.index ["title"], name: "index_categories_on_title"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -61,9 +72,17 @@ ActiveRecord::Schema.define(version: 20190328065743) do
     t.text     "description"
     t.integer  "quantity"
     t.integer  "price"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "image"
+    t.integer  "category_id"
+    t.string   "status",                               default: "off"
+    t.string   "uuid"
+    t.decimal  "msrp",        precision: 10, scale: 2
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["status", "category_id"], name: "index_products_on_status_and_category_id"
+    t.index ["title"], name: "index_products_on_title"
+    t.index ["uuid"], name: "index_products_on_uuid", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,6 +96,20 @@ ActiveRecord::Schema.define(version: 20190328065743) do
     t.boolean  "is_admin",               default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.string   "voter_type"
+    t.integer  "voter_id"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
 end

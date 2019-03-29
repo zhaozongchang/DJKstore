@@ -10,12 +10,13 @@ Rails.application.routes.draw do
         post :shipped
         post :return
       end
-    end 
+    end
   end
 
   resources :products do
     member do
       post :add_to_cart
+      put "like", to: "products#upvote"
     end
   end
 

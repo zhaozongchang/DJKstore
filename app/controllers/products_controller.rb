@@ -15,6 +15,18 @@ class ProductsController < ApplicationController
   else
     flash[:warning] = "你的购物车内已有此物件"
   end
-    redirect_to :back  
+    redirect_to :back
+  end
+
+  def upvote
+    @product = Product.find(params[:id])
+    @product.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @product=Product.find(params[:id])
+    @product.downvote_by current_user
+    redirect_to :back
   end
 end
