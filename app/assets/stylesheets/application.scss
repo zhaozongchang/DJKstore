@@ -274,3 +274,99 @@ aside ul li a:hover {
 .login-help{
   font-size: 12px;
 }
+
+
+/* 购物车 */
+
+.shopping-cart {
+  width: 100%;
+}
+
+.shopping-cart .item {
+  position: relative;
+  display: table;
+  width: 80%;
+  padding: 0 45px 10px 0;
+  border-bottom: 2px solid #ededed;
+  margin-bottom: 30px;
+}
+
+.shopping-cart .item .item-title > a {
+  color: #606060;
+
+  text-decoration: none;
+}
+
+.shopping-cart .item .item-remove {
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 28px;
+  top: 250px;
+  right: 0px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+
+.count-input {
+  position: absolute;
+  top:240px;
+  left:60%;
+  width: 100px;
+  margin: 10px 0;
+  select{
+    width: 100px;
+  }
+}
+
+.count-input input {
+  width: 80%;
+  height: 30px;
+  border: 2px solid #ededed;
+
+  border-radius: 4px;
+  background: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+
+
+.count-input .incr-btn {
+  display: block;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  font-size: 25px;
+  color: #606060;
+
+  font-weight: 300;
+  text-align: center;
+  line-height: 33px;
+  text-decoration: none;
+  top: -5px;
+  right: 20px;
+}
+
+.count-input .incr-btn:first-child {
+  right: auto;
+  left: 2px;
+}
+
+.amount {
+  color:#ef0568;
+  padding:10px;
+
+}
+.tips{
+  color:gray;
+  font-size: 13px;
+  font-family:fantasy;
+  letter-spacing: 1px;
+}
