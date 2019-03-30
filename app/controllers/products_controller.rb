@@ -29,4 +29,18 @@ class ProductsController < ApplicationController
     @product.downvote_by current_user
     redirect_to :back
   end
+
+  def favorite
+    @product = Product.find(params[:id])
+    current_user.favorite_products << @product
+    flash[:notice] = "您已收藏宝贝"
+    redirect_to :back
+  end
+
+  def unfavorite
+    @product = Product.find(params[:id])
+    current_user.favorite_products.delete(@product)
+    flash[:notice] = "您已取消收藏宝贝"
+    redirect_to :back
+  end
 end

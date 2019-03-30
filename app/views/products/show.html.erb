@@ -3,7 +3,7 @@
     <li><a href="<%= @product %>"><%= @product.title %></a></li>
   </ol>
 
-<div class="row">
+<div class="container">
   <div class="col-md-6">
     <% if @product.image.present? %>
       <%= image_tag(@product.image.medium.url, class: "thumbnail") %>
@@ -11,46 +11,62 @@
       <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
     <% end %>
   </div>
-
-  <div class="preview col-md-5 ">
-    <h2> <%= @product.title %> </h2>
-    <ul class="list-unstyled">
-      <li>库存: <%= @product.quantity %></li>
-    </ul>
-      <h4>
-        <span class="msrp">原价: ¥<%= @product.msrp %></span>
-      </h4>
-      <h3>
-        <strong>现价: ¥<%= @product.price %></strong>
-      </h3>
-      <p>
-        购买: <input type="text" name="quantity" value="1" />件
-      </p>
-
-      <%= link_to like_product_path(@product), method: :put do %>
-        <div class="pi-thumbs-up">
-            赞（<%= @product.get_upvotes.size %>）
+  <div class="details" style="margin-top:50px;">
+        <h3 class="product-title"><%= @product.title %></h3>
+        <div class="price-service">
+          <p class="price">原价 <span class="rmb">￥ </span><span class="msrp"><%= @product.msrp.to_i %></span> 元</p>
+          <p class="price">现价 <span class="rmb">￥ </span><span class="price"><%= @product.price %></span> 元</p>
+          <p class="service">服务 <span class="service-detail">7天无忧退货 | 48小时快速退款 | 正品保证</span></p>
         </div>
-       <% end %>
+        <div class="quantity-size">
+          <p class="delivery">运费 <span class="delivery">全场包邮</span></p>
+          <p class="quantity">库存 <span class="quantity"><%= @product.quantity %></span> 件 </p>
+          <!-- <p>购买: &nbsp &nbsp &nbsp<input type="text" style="width:50px" name="quantity" value="1" />&nbsp件</p> -->
+        </div>
+        <div class="action">
+        <div class="col-md-8" >
+             <% if @product.quantity.present? && @product.quantity > 0 %>
+                <%= link_to("加入购物车", add_to_cart_product_path(@product), method: :post,
+                            class: "add-to-cart btn btn-block") %>
+             <% else %>
+               已销售一空，无法购买
+             <% end %>
+        </div>
+        <div class="col-md-2" >
+          <% if current_user %>
+           <% if !current_user.is_fan_of?(@product) %>
+             <%= link_to favorite_product_path(@product), :class => "like btn btn-default", method: :post do %>
+               <i class="fa fa-heart fa-lg"></i>
+             <% end %>
+           <% else %>
+             <%= link_to unfavorite_product_path(@product), :class => "unlike btn btn-default", method: :post do %>
+               <i class="fa fa-heart fa-lg"></i>
+             <% end %>
+           <% end %>
+         <% else %>
+           <%= link_to favorite_product_path(@product), :class => "like btn btn-default",method: :post do %>
+             <i class="fa fa-heart fa-lg"></i>
+           <% end %>
+         <% end %>
+        </div>
 
-   <div class="pull-right">
-        <% if @product.quantity.present? && @product.quantity > 0 %>
-           <%= link_to("加入购物车", add_to_cart_product_path(@product), method: :post,
-                       class: "btn btn-lg btn-danger") %>
-        <% else %>
-          已销售一空，无法购买
+        <i class="fa fa-heart" style="font-size:20px;color:red"></i>（<%= @product.fans.count %>）
+        <br>
+        <%= link_to like_product_path(@product), method: :put do %>
+        <i class="fa fa-thumbs-up" style="font-size:20px"></i>（<%= @product.get_upvotes.size %>）
         <% end %>
-     </div>
-  </div>
+   </div><!-- End of product show page -->
 </div>
 
-<div class="col-md-8">
+
+<div class="row product_description col-md-12">
     <div class="tabs" >
       <div class="tabbable-panel">
         <div class="tabbable-line">
           <ul class="nav nav-tabs">
             <li role="presentation" class="active">
               <a href="#tab_default_1" data-toggle="tab">宝贝详情</a>
+
             </li>
             <li>
               <a href="#tab_default_2" data-toggle="tab">宝贝评价(<%= @product.reviews.count %>) </a>
@@ -62,7 +78,6 @@
                <p class="product-description"><%= @product.description.html_safe %></p>
                <p class="product-description2 text-center">产品展示</p>
                 <!--商品大图展示 -->
-
                <div class="faq">
                  <p class="faq-title text-center">常见问题</p>
                  <p class="question">使用什么快递发货？</p>
@@ -83,7 +98,7 @@
                 <div class="row">
                   <div class="col-sm-12 ">
                     <h4>
-                      累计评论（<%= @product.reviews.count %>）
+                      <%= @product.reviews.count %> Reviews
                     </h4>
                     <hr>
                     <div >

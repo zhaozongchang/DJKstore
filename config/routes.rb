@@ -13,9 +13,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :favorites
+
   resources :products do
     member do
       post :add_to_cart
+      post :favorite
+      post :unfavorite
       put "like", to: "products#upvote"
     end
     resources :reviews
@@ -33,7 +37,7 @@ Rails.application.routes.draw do
       post :add_quantity
       post :remove_quantity
     end
-  end 
+  end
   resources :orders do
     member do
       post :pay_with_alipay
